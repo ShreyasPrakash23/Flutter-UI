@@ -13,6 +13,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   int _counter1 = 0; //temp
   int _counter2 = 0; //humid
   late Timer _timer;
+
   @override
   void initState() {
     super.initState();
@@ -23,8 +24,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
     Timer.periodic(const Duration(seconds: 5), updateDataSource);
     _timer = Timer.periodic(Duration(seconds: 5), (timer) {
       setState(() {
-        _counter1 = math.Random().nextInt(3) + 32;
-        _counter2 = math.Random().nextInt(3) + 40;
+        _counter1 = math.Random().nextInt(5) + 29;
+        _counter2 = math.Random().nextInt(10) + 32;
       });
     });
   }
@@ -54,7 +55,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
 
   int time = 10;
   updateDataSource(Timer timer) {
-    chartData.add(LiveData(time++, (math.Random().nextInt(60))));
+    chartData.add(LiveData(time++, (math.Random().nextInt(15) + 65)));
     chartData.removeAt(0);
     _chartSeriesController.updateDataSource(
         addedDataIndex: chartData.length - 1, removedDataIndex: 0);
@@ -106,7 +107,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: Colors.black,
+                color: Colors.grey.shade200,
               ),
 
             ),
@@ -119,6 +120,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
                   margin: const EdgeInsets.only(top: 8),
                   child: Text('Temperature : $_counter1 C'),
                 ),
+                SizedBox(height: 15),
                 Icon(Icons.water_drop, color: Colors.blue,size: 120,),
                 Container(
                   margin: const EdgeInsets.only(top: 8),
@@ -131,8 +133,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
           Container(
 
             margin: const EdgeInsets.only(top: 10),
-            height: 400,
-            width: 400,
+            height: 500,
+            width: 500,
 
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -142,7 +144,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: Colors.black,
+                color: Colors.grey.shade200,
               ),
 
             ),
@@ -154,23 +156,23 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
                   child: Center(
                     child: Column(
                       children: [
-                         Icon(Icons.place, color: Colors.red, size: 60),
-                        Text('Device - 1 (ID: 56xx21)'),
+                        Icon(Icons.place, color: Colors.red, size: 40),
+                        Text('Device - 1 (ID: 56xx21)', style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),),
                       ],
                     ),
-                ),
+                  ),
                 ),
                 Positioned(
-                  bottom: 245,
+                  bottom: 120,
                   right: 245,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Icon(Icons.place, color: Colors.black, size: 60),
-                          Text('Device -2 (ID: 56XX27)'),
-                        ],
-                      ),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Icon(Icons.place, color: Colors.black, size: 40),
+                        Text('Device -2 (ID: 56XX27)',style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),),
+                      ],
                     ),
+                  ),
                 ),
               ],
             ),
@@ -182,7 +184,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: Colors.black,
+                color: Colors.grey.shade200,
               ),
 
             ),
@@ -192,15 +194,10 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
             child: Center(
               child: Column(
                 children: [
-                  ImageIcon(
-                    AssetImage('assets/soil.png'),
-                    size: 120,
-                  ),
+                  Image.network('https://cdn-icons-png.flaticon.com/128/5052/5052300.png'),
                   Text('Soil type : red soil'),
-                  ImageIcon(
-                    AssetImage('assets/plant.png'),
-                    size: 120,
-                  ),
+                  SizedBox(height: 30),
+                  Image.network('https://cdn-icons-png.flaticon.com/128/3944/3944289.png'),
                   Text('Crop : Arecanut'),
                 ],
               ),
@@ -209,11 +206,11 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
           Container(
 
             decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Colors.black,
-              )
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Colors.grey.shade200,
+                )
             ),
             margin: const EdgeInsets.only(top: 10),
             height: 75,
@@ -222,6 +219,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text('Generic Information', style: TextStyle(fontWeight: FontWeight.bold), ),
+                  SizedBox(height: 60),
                   Text('Number of crops: 100'),
                   Text('Area of the plot: 120 sq m'),
                 ],
